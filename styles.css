@@ -1,0 +1,101 @@
+styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+    justify-content: center ;
+    width: 100%;
+    /* max-width: 600px; */
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+}
+
+h1 {
+    text-align: center;
+}
+
+#card-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#card-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    justify-content: center ;
+    background: #0056b3;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    position: relative;
+    min-width: 100px;
+    text-align: center;
+    height: 50px;
+}
+
+.card button {
+    /* position: absolute; */
+    margin-top: 20px;
+    top: 20px;
+    right: 5px;
+    background: #0d054adc;
+    border: none;
+    border-radius: 2rem;
+    color: #fff;
+    width: 5px;
+    height: 15px;
+    cursor: pointer;
+    font-size: 12px;
+    /* line-height: 20px; */
+
+    position: bottom;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
