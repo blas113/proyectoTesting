@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Card Manager</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Gestor de Tareas</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Card Manager</h1>
-        <form id="card-form">
-            <input type="text" id="card-input" placeholder="Enter card content" required>
-            <button type="submit">Add Card</button>
-        </form>
-        <div id="card-container"></div>
-    </div>
-    <script src="app.js"></script>
+  <h1>Gestor de Tareas</h1>
+  <form id="formTarea">
+    <input type="text" id="inputTarea" placeholder="Escribe una tarea..." maxlength="100" required />
+    <button type="submit">Agregar</button>
+  </form>
+
+  <div id="contenedorTarjetas"></div>
+
+  <script src="app.js"></script>
 </body>
 </html>

@@ -1,59 +1,97 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const cardForm = document.getElementById("card-form");
-    const cardInput = document.getElementById("card-input");
-    const cardContainer = document.getElementById("card-container");
+const form = document.getElementById("formTarea");
+const input = document.getElementById("inputTarea");
+const contenedor = document.getElementById("contenedorTarjetas");
 
- 
-    const loadCards = () => {
-        const cards = JSON.parse(localStorage.getItem("cards")) || [];
-        cardContainer.innerHTML = "";
-        cards.forEach((cardContent, index) => {
-            createCardElement(cardContent, index);
-        });
-    };
+let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
 
-  
-    const saveCards = (cards) => {
-        localStorage.setItem("cards", JSON.stringify(cards));
-    };
+// Mostrar tareas al iniciar
+tareas.forEach(t => crearTarjeta(t.texto, t.completada));
 
-  
-    const createCardElement = (content, index) => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.textContent = content;
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const texto = input.value.trim();
 
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "X";
-        deleteButton.addEventListener("click", () => {
-            deleteCard(index);
-        });
+  if (!validarTexto(texto)) {
+    alert("La tarea no puede estar vacía ni contener caracteres inválidos.");
+    return;
+  }
 
-        card.appendChild(deleteButton);
-        cardContainer.appendChild(card);
-    };
-
-   
-    cardForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const content = cardInput.value.trim();
-        if (content) {
-            const cards = JSON.parse(localStorage.getItem("cards")) || [];
-            cards.push(content);
-            saveCards(cards);
-            createCardElement(content, cards.length - 1);
-            cardInput.value = "";
-        }
-    });
-
-   
-    const deleteCard = (index) => {
-        const cards = JSON.parse(localStorage.getItem("cards")) || [];
-        cards.splice(index, 1);
-        saveCards(cards);
-        loadCards();
-    };
-
-   
-    loadCards();
+  const nuevaTarea = { texto, completada: false };
+  tareas.push(nuevaTarea);
+  guardarTareas();
+  crearTarjeta(nuevaTarea.texto, nuevaTarea.completada);
+  input.value = "";
 });
+
+function validarTexto(texto) {
+  const regex = /^[a-zA-Z0-9\s.,áéíóúÁÉÍÓÚñÑ]{1,100}$/;
+  return regex.test(texto);
+}
+
+function guardarTareas() {
+  localStorage.setItem("tareas", JSON.stringify(tareas));
+}
+
+function crearTarjeta(texto, completada) {
+  const tarjeta = document.createElement("div");
+  tarjeta.classList.add("tarjeta");
+  if (completada) tarjeta.classList.add("completada");
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.checked = completada;
+
+  const parrafo = document.createElement("p");
+  parrafo.textContent = texto;
+
+  const btnEditar = document.createElement("button");
+  btnEditar.textContent = "Editar";
+  btnEditar.classList.add("editar");
+
+  const btnEliminar = document.createElement("button");
+  btnEliminar.textContent = "X";
+  btnEliminar.classList.add("eliminar");
+
+  checkbox.addEventListener("change", () => {
+    tarjeta.classList.toggle("completada", checkbox.checked);
+    const index = obtenerIndice(parrafo.textContent);
+    if (index !== -1) {
+      tareas[index].completada = checkbox.checked;
+      guardarTareas();
+    }
+  });
+
+  btnEditar.addEventListener("click", () => {
+    const nuevoTexto = prompt("Editar tarea:", parrafo.textContent);
+    if (nuevoTexto && validarTexto(nuevoTexto.trim())) {
+      const index = obtenerIndice(parrafo.textContent);
+      if (index !== -1) {
+        tareas[index].texto = nuevoTexto.trim();
+        guardarTareas();
+        parrafo.textContent = nuevoTexto.trim();
+      }
+    } else {
+      alert("Texto inválido.");
+    }
+  });
+
+  btnEliminar.addEventListener("click", () => {
+    const index = obtenerIndice(parrafo.textContent);
+    if (index !== -1) {
+      tareas.splice(index, 1);
+      guardarTareas();
+      tarjeta.remove();
+    }
+  });
+
+  tarjeta.appendChild(checkbox);
+  tarjeta.appendChild(parrafo);
+  tarjeta.appendChild(btnEditar);
+  tarjeta.appendChild(btnEliminar);
+
+  contenedor.appendChild(tarjeta);
+}
+
+function obtenerIndice(texto) {
+  return tareas.findIndex(t => t.texto === texto);
+}
