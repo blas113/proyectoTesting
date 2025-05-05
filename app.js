@@ -4,8 +4,9 @@ const contenedor = document.getElementById("contenedorTarjetas");
 
 let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
 
-// Mostrar tareas al iniciar
+
 tareas.forEach(t => crearTarjeta(t.texto, t.completada));
+actualizarEstadisticas ();
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -30,6 +31,8 @@ function validarTexto(texto) {
 
 function guardarTareas() {
   localStorage.setItem("tareas", JSON.stringify(tareas));
+  actualizarEstadisticas();
+
 }
 
 function crearTarjeta(texto, completada) {
@@ -94,4 +97,17 @@ function crearTarjeta(texto, completada) {
 
 function obtenerIndice(texto) {
   return tareas.findIndex(t => t.texto === texto);
+}
+
+
+function actualizarEstadisticas() {
+  const total = tareas.length;
+  const completadas = tareas.filter(t => t.completada).length;
+  const pendientes = total - completadas;
+  const porcentaje = total ? Math.round((completadas / total) * 100) : 0;
+
+  document.getElementById("total").textContent = total;
+  document.getElementById("completadas").textContent = completadas;
+  document.getElementById("pendientes").textContent = pendientes;
+  document.getElementById("porcentaje").textContent = `${porcentaje}%`;
 }
