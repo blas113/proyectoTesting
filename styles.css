@@ -2,6 +2,11 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   
   form {
@@ -29,6 +34,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 15px;
   }
   
   .tarjeta {
@@ -70,8 +76,10 @@ body {
   }
   
   #estadisticas {
-    margin: 20px auto;
-    width: fit-content;
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
     background-color: #eef;
     padding: 15px;
     border-radius: 10px;
@@ -79,7 +87,13 @@ body {
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   }
   #estadisticas p {
+    display: flex;
+    flex-direction: row;
+    align-items: center;      
+    justify-content: center;
+    width: 100%;
     margin: 5px 0;
     font-weight: bold;
+    padding-left: 5px;
   }
   
