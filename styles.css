@@ -97,3 +97,28 @@ body {
     padding-left: 5px;
   }
   
+  .tarjeta.importante {
+  border: 2px solid gold;
+  background-color: #fffbe6;
+}
+
+.tarjeta.vencida {
+  border-color: red;
+  background-color: #ffe5e5;
+}
+
+.tarjeta .categoria {
+  font-size: 0.9em;
+  font-style: italic;
+  color: #555;
+}
+
+.tarjeta .estrella {
+  color: gold;
+  font-size: 1.2em;
+  margin-left: auto;
+}
+
+#vaciarLista {
+   margin-bottom: 20px;
+}

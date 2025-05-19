@@ -7,10 +7,27 @@
 </head>
 <body>
   <h1>Gestor de Tareas</h1>
-  <form id="formTarea">
-    <input type="text" id="inputTarea" placeholder="Escribe una tarea..." maxlength="100" required />
-    <button type="submit">Agregar</button>
-  </form>
+<form id="formTarea">
+  <input type="text" id="inputTarea" placeholder="Escribe una tarea..." maxlength="100" required />
+
+  <select id="categoriaTarea">
+    <option value="Personal">Personal</option>
+    <option value="Trabajo">Trabajo</option>
+    <option value="Estudio">Estudio</option>
+  </select>
+
+  <input type="date" id="fechaVencimiento" />
+
+  <label>
+    ⭐ 
+    <input type="checkbox" id="tareaImportante" />
+  </label>
+
+  <button type="submit">Agregar</button>
+</form>
+
+<button id="vaciarLista" style="margin-top: 10px;">Vaciar lista</button>
+
 
   <div id="estadisticas">
     <p>Total tareas: <span id="total">0</span></p>
