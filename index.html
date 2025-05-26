@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<section class="principal">
   <h1>Gestor de Tareas</h1>
 <form id="formTarea">
   <input type="text" id="inputTarea" placeholder="Escribe una tarea..." maxlength="100" required />
@@ -16,6 +18,7 @@
     <option value="Estudio">Estudio</option>
   </select>
 
+  
   <input type="date" id="fechaVencimiento" />
 
   <label>
@@ -23,12 +26,21 @@
     <input type="checkbox" id="tareaImportante" />
   </label>
 
+  
+  <input type="text" id="inputSubtarea" placeholder="Agrega subtarea (opcional)" />
+  <button type="button" id="agregarSubtarea">➕ Subtarea</button>
+  
+
+
   <button type="submit">Agregar</button>
 </form>
 
 <button id="vaciarLista" style="margin-top: 10px;">Vaciar lista</button>
 
+  <div id="contenedorTarjetas"></div>
 
+</section>
+<section>
   <div id="estadisticas">
     <p>Total tareas: <span id="total">0</span></p>
     <p>Completadas: <span id="completadas">0</span></p>
@@ -37,8 +49,13 @@
   </div>
     
 
-  <div id="contenedorTarjetas"></div>
+  <h3 id="historial">✅ Historial de completadas</h3>
+  <div id="historialCompletadas"></div>
 
+  <div id="logro" style="color: green; font-weight: bold; margin-top: 10px;"></div>
+
+
+</section class="secundaria">
   <script src="app.js"></script>
 </body>
 </html>

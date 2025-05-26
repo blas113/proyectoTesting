@@ -21,12 +21,15 @@ form.addEventListener("submit", (e) => {
   }
 
   const nuevaTarea = {
-    texto,
-    categoria,
-    fecha,
-    importante,
-    completada: false
-  };
+  texto,
+  categoria,
+  fecha,
+  importante,
+  completada: false,
+  subtareas: subtareasTemporales
+};
+subtareasTemporales = []; 
+
 
   tareas.push(nuevaTarea);
   guardarTareas();
@@ -124,6 +127,56 @@ function crearTarjeta(tarea) {
   tarjeta.appendChild(btnEliminar);
 
   contenedor.appendChild(tarjeta);
+
+ if (tarea.subtareas && tarea.subtareas.length > 0) {
+  const listaSub = document.createElement("ul");
+  listaSub.classList.add("subtareas");
+
+  tarea.subtareas.forEach((sub, index) => {
+    const li = document.createElement("li");
+    li.classList.add("subtarea-item");
+
+    const subCheck = document.createElement("input");
+    subCheck.type = "checkbox";
+    subCheck.checked = sub.completada;
+
+    subCheck.addEventListener("change", () => {
+      sub.completada = subCheck.checked;
+      guardarTareas();
+    });
+
+    const subTexto = document.createElement("span");
+    subTexto.textContent = sub.texto;
+
+    if (sub.completada) subTexto.style.textDecoration = "line-through";
+
+    subCheck.addEventListener("change", () => {
+      sub.completada = subCheck.checked;
+      subTexto.style.textDecoration = subCheck.checked ? "line-through" : "none";
+      guardarTareas();
+    });
+
+    const btnEliminarSub = document.createElement("button");
+    btnEliminarSub.textContent = "❌";
+    btnEliminarSub.classList.add("eliminar-sub");
+
+    btnEliminarSub.addEventListener("click", () => {
+      tarea.subtareas.splice(index, 1);
+      guardarTareas();
+      tarjeta.remove(); 
+      crearTarjeta(tarea);
+    });
+
+    li.appendChild(subCheck);
+    li.appendChild(subTexto);
+    li.appendChild(btnEliminarSub);
+    listaSub.appendChild(li);
+  });
+
+  tarjeta.appendChild(listaSub);
+}
+
+
 }
 
 function obtenerIndice(texto) {
@@ -141,6 +194,19 @@ function actualizarEstadisticas() {
   document.getElementById("completadas").textContent = completadas;
   document.getElementById("pendientes").textContent = pendientes;
   document.getElementById("porcentaje").textContent = `${porcentaje}%`;
+
+  mostrarHistorial();
+  verificarLogros();
+}
+
+function mostrarHistorial() {
+  const historial = document.getElementById("historialCompletadas");
+  historial.innerHTML = "";
+  tareas.filter(t => t.completada).forEach(t => {
+    const div = document.createElement("div");
+    div.textContent = `✔ ${t.texto}`;
+    historial.appendChild(div);
+  });
 }
 
 document.getElementById("vaciarLista").addEventListener("click", () => {
@@ -151,3 +217,51 @@ document.getElementById("vaciarLista").addEventListener("click", () => {
     actualizarEstadisticas();
   }
 });
+
+
+let subtareasTemporales = [];
+
+document.getElementById("agregarSubtarea").addEventListener("click", () => {
+  const subInput = document.getElementById("inputSubtarea");
+  const texto = subInput.value.trim();
+  if (texto && validarTexto(texto)) {
+    subtareasTemporales.push({ texto, completada: false });
+    mostrarSubtareasTemporales();
+    subInput.value = "";
+  }
+});
+
+function mostrarSubtareasTemporales() {
+  const lista = document.getElementById("listaSubtareas");
+  lista.innerHTML = "";
+  subtareasTemporales.forEach((st, i) => {
+    const li = document.createElement("li");
+    li.textContent = st.texto;
+    lista.appendChild(li);
+  });
+}
+
+
+const nuevaTarea = {
+  texto,
+  categoria,
+  fecha,
+  importante,
+  completada: false,
+  subtareas: subtareasTemporales
+};
+subtareasTemporales = []; 
+
+
+function verificarLogros() {
+  const completadas = tareas.filter(t => t.completada).length;
+  const logro = document.getElementById("logro");
+
+  if (completadas >= 5 && completadas < 10) {
+    logro.textContent = "🏅 ¡Completaste 5 tareas!";
+  } else if (completadas >= 10) {
+    logro.textContent = "🥇 ¡Completaste 10 tareas!";
+  } else {
+    logro.textContent = "";
+  }
+}
