@@ -25,11 +25,32 @@ body {
 
 
 
+.btn-importante {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-right: 5px;
+  color: #787878cb;
+}
+.btn-importante:hover {
+  color: gold;
+  transition: 0.5s ease;
+}
 
 
 
 
 
+.tarjeta .btn-importante[data-importante="true"] {
+  background-color: transparent; 
+}
+
+
+.tarjeta:has(.btn-importante[data-importante="true"]) {
+  background-color: #fff8dc; 
+  border-left: 4px solid gold;
+}
 
 
 
@@ -172,3 +193,88 @@ body {
   color: red;
   cursor: pointer;
 }
+
+
+
+
+
+/* MODO OSCURO */
+
+
+#modoOscuro {
+  margin-bottom: 10px;
+}
+
+body.dark-mode {
+  background-color: rgb(38, 38, 38);
+  color: white;
+}
+
+body.dark-mode h1,
+body.dark-mode h3 {
+  color: white;
+}
+
+
+
+body.dark-mode input[type="text"],
+body.dark-mode input[type="date"],
+body.dark-mode select {
+  background-color: #222;
+  color: #f0f0f0;
+  border: 1px solid #555;
+}
+
+body.dark-mode button {
+  background-color: #333;
+  color: #f0f0f0;
+  border: 1px solid #555;
+}
+
+body.dark-mode button:hover {
+  background-color: #555;
+}
+
+body.dark-mode #modoOscuro {
+  background-color: #333;
+}
+
+body.dark-mode #vaciarLista {
+  background-color: #444;
+}
+
+body.dark-mode .tarjeta {
+  background-color: #2e2e2e;
+  border-color: #444;
+}
+
+body.dark-mode .tarjeta.completada p {
+  color: #aaa;
+}
+
+body.dark-mode #estadisticas,
+body.dark-mode #historial {
+  background-color: #2e2e2e;
+}
+
+body.dark-mode .tarjeta:has(.btn-importante[data-importante="true"]) {
+  background-color: #fffed2e9;
+  border: 1.5px solid gold;
+  color: #222;
+}
+
+body.dark-mode .eliminar-sub {
+  color: #f88;
+}
+
+
+body.dark-mode #logro, body.dark-mode #resumenPorDia {
+  background: none;
+}
+
+body.dark-mode .btn-importante {
+  border: none;
+}
+
+
+

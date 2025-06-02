@@ -18,16 +18,21 @@
     <option value="Estudio">Estudio</option>
   </select>
 
+
   
   <input type="date" id="fechaVencimiento" />
 
   <label>
-    ⭐ 
+    Importante⭐ 
     <input type="checkbox" id="tareaImportante" />
   </label>
 
   
+
+  
   <input type="text" id="inputSubtarea" placeholder="Agrega subtarea (opcional)" />
+
+
   <button type="button" id="agregarSubtarea">➕ Subtarea</button>
   
 
@@ -37,11 +42,19 @@
 
 <button id="vaciarLista" style="margin-top: 10px;">Vaciar lista</button>
 
+
   <div id="contenedorTarjetas"></div>
 
+  
 </section>
+
+
+
 <section>
+   <button id="modoOscuro" onclick="myFunction()">🌙 Modo Oscuro</button>
+
   <div id="estadisticas">
+
     <p>Total tareas: <span id="total">0</span></p>
     <p>Completadas: <span id="completadas">0</span></p>
     <p>Pendientes: <span id="pendientes">0</span></p>
@@ -54,6 +67,7 @@
 
   <div id="logro" style="color: green; font-weight: bold; margin-top: 10px;"></div>
 
+  <div id="resumenPorDia"></div>
 
 </section class="secundaria">
   <script src="app.js"></script>
