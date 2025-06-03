@@ -290,15 +290,15 @@ function mostrarSubtareasTemporales() {
 }
 
 
-const nuevaTarea = {
-  texto,
-  categoria,
-  fecha,
-  importante,
-  completada: false,
-  subtareas: subtareasTemporales
-};
-subtareasTemporales = [];
+// const nuevaTarea = {
+//   texto,
+//   categoria,
+//   fecha,
+//   importante,
+//   completada: false,
+//   subtareas: subtareasTemporales
+// };
+// subtareasTemporales = [];
 
 
 function verificarLogros() {
@@ -363,8 +363,23 @@ function myFunction() {
   }
 }
 
+// EXPORTAR QR 
 
 
+document.getElementById("exportarQR").addEventListener("click", () => {
+  const datos = JSON.stringify(tareas);
+  const contenedorQR = document.getElementById("qrContainer");
+  contenedorQR.innerHTML = ""; 
+
+  new QRCode(contenedorQR, {
+    text: datos,
+    width: 256,
+    height: 256,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+});
 
 
 
