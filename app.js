@@ -84,7 +84,7 @@ function crearTarjeta(tarea) {
   // }
 
   const btnEditar = document.createElement("button");
-  btnEditar.textContent = "✏️";
+  btnEditar.textContent = "Editar";
   btnEditar.classList.add("editar");
 
   const btnEliminar = document.createElement("button");
@@ -272,23 +272,24 @@ let subtareasTemporales = [];
 document.getElementById("agregarSubtarea").addEventListener("click", () => {
   const subInput = document.getElementById("inputSubtarea");
   const texto = subInput.value.trim();
-  if (texto && validarTexto(texto)) {
+
+  if (texto.length > 0) {
     subtareasTemporales.push({ texto, completada: false });
-    mostrarSubtareasTemporales();
+    // mostrarSubtareasTemporales();
     subInput.value = "";
+    alert("✅ Subtarea agregada con éxito.");
   }
 });
 
 function mostrarSubtareasTemporales() {
   const lista = document.getElementById("listaSubtareas");
   lista.innerHTML = "";
-  subtareasTemporales.forEach((st, i) => {
+  subtareasTemporales.forEach(st => {
     const li = document.createElement("li");
     li.textContent = st.texto;
     lista.appendChild(li);
   });
 }
-
 
 // const nuevaTarea = {
 //   texto,
